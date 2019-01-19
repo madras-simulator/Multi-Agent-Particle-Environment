@@ -59,7 +59,7 @@ def p_train(make_obs_ph_n, act_space_n, p_index, p_func, q_func, optimizer, grad
 
         # Create callable functions
         train = U.function(inputs=obs_ph_n + act_ph_n, outputs=loss, updates=[optimize_expr])
-        act = U.function(inputs=[obs_ph_n[p_index]], outputs=act_sample)#???????????
+        act = U.function(inputs=[obs_ph_n[p_index]], outputs=act_sample)
         p_values = U.function([obs_ph_n[p_index]], p)
 
         # target network
@@ -92,7 +92,7 @@ def q_train(make_obs_ph_n, act_space_n, q_index, q_func, optimizer, grad_norm_cl
 
         # viscosity solution to Bellman differential equation in place of an initial condition
         q_reg = tf.reduce_mean(tf.square(q))
-        loss = q_loss #+ 1e-3 * q_reg
+        loss = q_loss + 1e-3 * q_reg
 
         optimize_expr = U.minimize_and_clip(optimizer, loss, q_func_vars, grad_norm_clipping)
 
@@ -162,7 +162,7 @@ class MADDPGAgentTrainer(AgentTrainer):
         print("I am here")
         if len(self.replay_buffer) < self.max_replay_buffer_len: # replay buffer is not large enough
             return
-        if not t % 10 == 0:  # only update every 100 steps
+        if not t % 10 == 0:  # only update every 10 steps
             return
 
         self.replay_sample_index = self.replay_buffer.make_index(self.args.batch_size)
