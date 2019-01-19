@@ -40,7 +40,7 @@ class MultiAgentTorcsEnv():
 
         # configure spaces
         self.action_space = []
-        self.observation_space = []
+        self.observation_space = []	
 
         for agent in self.agents:
             self.action_space.append(world.action_space)
@@ -57,6 +57,7 @@ class MultiAgentTorcsEnv():
         self.agents = self.world.agent_list
 
         # set action for each agent
+        for i, agent in enumerate(self.agents):
             agent.action = action_n[i] 
 
         # advance world state

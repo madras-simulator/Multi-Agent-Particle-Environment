@@ -31,7 +31,7 @@ class TorcsEnv:
 
         self.currState = None 
 
-        os.system("cd ~/vtorcs2 && ./torcs &")
+        os.system("cd ~/vtorcs3 && ./torcs &")
         time.sleep(1.0)
         os.system(u'sh autostart.sh')
 
@@ -215,7 +215,7 @@ class TorcsEnv:
         return self.observation
 
     def reset_torcs(self):
-        #print("relaunch torcs")		#to be used with startTorcs.sh
+        #print("relaunch torcs")		
         os.system('pkill torcs &')
 
     def agent_to_torcs(self, u):

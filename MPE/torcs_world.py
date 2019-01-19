@@ -22,7 +22,7 @@ class Agent(object):
 
 class World(object):
       def __init__(self):
-          self.n = 3
+          self.n = 4
           #self.n2 = 0
           self.env = TorcsEnv(vision=False, throttle=True, gear_change=False)
           self.observation_space = self.env.observation_space # basically this is one agents' action space 
@@ -63,8 +63,6 @@ class World(object):
           return agent.s_t
 
       def update_agent_state(self, agent):  #this should be a function in agent class
-          with open("log2.txt", "a") as f:
-               f.write(l)
           print("agent port " + str(agent.port) + "  " + "action is " + str(agent.action))
           ob, r_t, done, info = self.env.step(self.step_count, agent.client, agent.action, early_stop=0)
           agent.done = done
